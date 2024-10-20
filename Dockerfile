@@ -7,7 +7,6 @@ LABEL Description="Basic Nginx+PHP container with php composer"
 # Arguments
 ARG PHP_VERSION=83
 ARG TZ=UTC
-ARG COMPOSER_MODULES=""
 
 # Install dependencies
 RUN apk add --no-cache \
@@ -34,8 +33,7 @@ RUN apk add --no-cache \
     php${PHP_VERSION}-xmlwriter \
     supervisor && \
     curl -s https://getcomposer.org/installer | php && \
-    mkdir -p /var/www/public /var/www/modules && \
-    cd /var/www/modules && for MODULE in ${COMPOSER_MODULES}; do php /composer.phar --optimize-autoloader --no-interaction --no-progress install ${MODULE}; done
+    mkdir -p /var/www/public /var/www/modules
   
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
@@ -61,4 +59,4 @@ HEALTHCHECK --timeout=10s CMD curl -s -f http://127.0.0.1/fpm-ping || exit 1
 
 # Let supervisord start nginx & php-fpm
 EXPOSE 80
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/entrypoint.sh"]
