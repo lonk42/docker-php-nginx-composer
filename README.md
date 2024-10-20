@@ -1,7 +1,7 @@
 # Docker PHP-FPM+Nginx with PHP Composer
 Basic [Alpine Linux](https://www.alpinelinux.org/) base container image running [PHP-FPM](https://www.php.net/manual/install.fpm.php) + [Nginx](https://nginx.org/) with [composer](https://getcomposer.org/).
 
-![release](https://img.shields.io/badge/version-0.0.1-blue)
+![release](https://img.shields.io/badge/version-0.0.1-green)
 ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Usage
