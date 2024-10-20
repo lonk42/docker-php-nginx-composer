@@ -6,12 +6,14 @@ LABEL Description="Basic Nginx+PHP container with php composer"
 
 # Arguments
 ARG PHP_VERSION=83
-ARG TZ=UTC
+ENV TZ=UTC
+ENV EXTRA_PACKAGES=""
 
 # Install dependencies
 RUN apk add --no-cache \
     curl \
     nginx \
+    sudo \
     php${PHP_VERSION} \
     php${PHP_VERSION}-cli \
     php${PHP_VERSION}-ctype \
@@ -35,24 +37,18 @@ RUN apk add --no-cache \
     curl -s https://getcomposer.org/installer | php && \
     mkdir -p /var/www/public /var/www/modules
   
-# Configure nginx
+# Configure nginx, fpm, supervisord, entrypoint
 COPY config/nginx.conf /etc/nginx/nginx.conf
 COPY config/default.conf /etc/nginx/http.d/
-
-# Configure PHP-FPM
 COPY config/fpm-pool.conf /etc/php${PHP_VERSION}/php-fpm.d/www.conf
 COPY config/fpm-extra.ini /etc/php${PHP_VERSION}/conf.d/10_docker.ini
-
-# Configure supervisord
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY entrypoint.sh /entrypoint.sh
+COPY install-composer-modules.sh /install-composer-modules.sh
 
-# Update config files with dockerfile ARGs
-RUN sed -i "s/<PHP_VERSION>/${PHP_VERSION}/g" /etc/supervisor/conf.d/supervisord.conf && \
-    sed -i "s/<TZ>/${TZ}/g" /etc/php${PHP_VERSION}/conf.d/10_docker.ini
-
-# Set permissions and set user
-RUN chown -R nobody:nobody /var/www/ /run /var/lib/nginx /var/log/nginx
-USER nobody
+# Set permissions and php version
+RUN chown -R nobody:nobody /var/www/ /run /var/lib/nginx /var/log/nginx /etc/php${PHP_VERSION}/conf.d /install-composer-modules.sh && \
+    sed -i "s/<PHP_VERSION>/${PHP_VERSION}/g" /etc/supervisor/conf.d/supervisord.conf
 
 # Set a healthcheck to check if fpm is replying
 HEALTHCHECK --timeout=10s CMD curl -s -f http://127.0.0.1/fpm-ping || exit 1
