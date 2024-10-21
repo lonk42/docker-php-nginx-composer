@@ -42,10 +42,6 @@ spec:
           tcpSocket:
             port: 8080
         volumeMounts:
-        {{- range .Values.volume_mounts -}}
-          {{ . | nindent 5 }}
-        {{- end }}
+        {{- .Values.volume_mounts | toYaml | nindent 10 }}
         volumes:
-        {{- range .Values.volumes -}}
-          {{ . | nindent 5 }}
-        {{- end }}
+        {{- .Values.volumes | toYaml | nindent 10 }}
