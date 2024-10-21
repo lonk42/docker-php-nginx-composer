@@ -5,6 +5,7 @@ Basic [Alpine Linux](https://www.alpinelinux.org/) base container image running 
 ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Usage
+
 * Nginx runs on port 80
 * Document root is set to `/var/www/public`
 * Composer modules are installed in `/var/www/modules`
@@ -12,9 +13,16 @@ Basic [Alpine Linux](https://www.alpinelinux.org/) base container image running 
   * (You do not need to mount the composer modules, however they will need to reinstall each run if you don't)
 * Extra APK packages can be installed on runtime with the environment variable `EXTRA_PACKAGES`
 
-Running the container with Docker:
+### Docker CLI
 ```
 docker run -p 80:80 -v /path/to/your_php_code:/var/www/public -v /path/to/composer_modules:/var/www/modules -e COMPOSER_MODULES="module/path module2/path" onthelink/php-nginx-composer:latest
+```
+
+### Helm
+```
+cd helm
+# Edit values.yaml
+helm upgrade --namespace my_namespace --create-namespace -i my_appname . --values values.yaml
 ```
 
 ## Building
