@@ -5,7 +5,7 @@ set -e
 addgroup -g ${GID} web
 adduser -h /var/www -H -D -G web -u ${UID} -s /sbin/nologin web
 chown -R web:web /var/lib/nginx /var/log/nginx /etc/php*/conf.d /install-composer-modules.sh
-chown web:web /dev/stdout /dev/stderr /var/www/ /run
+chown web:web /dev/stdout /dev/stderr /var/www/ /run /run/nginx
 
 # Install extra packages
 apk add --no-cache ${EXTRA_PACKAGES}
