@@ -43,5 +43,5 @@ spec:
             port: 8080
         volumeMounts:
         {{- .Values.volume_mounts | toYaml | nindent 10 }}
-        volumes:
-        {{- .Values.volumes | toYaml | nindent 10 }}
+      volumes:
+      {{- .Values.volumes | toYaml | nindent 8 }}
