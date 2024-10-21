@@ -1,7 +1,7 @@
 # Docker PHP-FPM+Nginx with PHP Composer
 Basic [Alpine Linux](https://www.alpinelinux.org/) base container image running [PHP-FPM](https://www.php.net/manual/install.fpm.php) + [Nginx](https://nginx.org/) with [composer](https://getcomposer.org/).
 
-![release](https://img.shields.io/badge/version-1.0.1-green)
+![release](https://img.shields.io/badge/version-1.1.0-green)
 ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Usage
@@ -12,6 +12,7 @@ Basic [Alpine Linux](https://www.alpinelinux.org/) base container image running 
   * Define these modules as the environment variable `COMPOSER_MODULES`
   * (You do not need to mount the composer modules, however they will need to reinstall each run if you don't)
 * Extra APK packages can be installed on runtime with the environment variable `EXTRA_PACKAGES`
+* The UID and GID used by the container can be defined as environment variables `UID` and `GID`
 
 ### Docker CLI
 ```

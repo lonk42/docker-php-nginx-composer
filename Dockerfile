@@ -7,6 +7,8 @@ LABEL Description="Basic Nginx+PHP container with php composer"
 # Arguments
 ARG PHP_VERSION=83
 ENV TZ=UTC
+ENV UID=1001
+ENV GID=1001
 ENV EXTRA_PACKAGES=""
 
 # Install dependencies
@@ -47,8 +49,7 @@ COPY entrypoint.sh /entrypoint.sh
 COPY install-composer-modules.sh /install-composer-modules.sh
 
 # Set permissions and php version
-RUN chown -R nobody:nobody /var/www/ /run /var/lib/nginx /var/log/nginx /etc/php${PHP_VERSION}/conf.d /install-composer-modules.sh && \
-    sed -i "s/<PHP_VERSION>/${PHP_VERSION}/g" /etc/supervisor/conf.d/supervisord.conf
+RUN sed -i "s/<PHP_VERSION>/${PHP_VERSION}/g" /etc/supervisor/conf.d/supervisord.conf
 
 # Set a healthcheck to check if fpm is replying
 HEALTHCHECK --timeout=10s CMD curl -s -f http://127.0.0.1/fpm-ping || exit 1

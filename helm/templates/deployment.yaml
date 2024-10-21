@@ -26,6 +26,10 @@ spec:
           value: "{{ .Values.composer_modules }}"
         - name: EXTRA_PACKAGES
           value: "{{ .Values.extra_packages }}"
+        - name: UID
+          value: "{{ .Values.user_id }}"
+        - name: GID
+          value: "{{ .Values.group_id }}"
         ports:
           - containerPort: 8080
             protocol: TCP

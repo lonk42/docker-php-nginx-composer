@@ -9,6 +9,32 @@ pvc: []
 #    volumeName: web-storage-pv
 
 volume_mounts: []
+#volume_mounts:
+#  - name: public
+#    mountPath: /var/www/public
+
 volumes: []
+#volumes:
+#  - name: public
+#    persistentVolumeClaim:
+#      claimName: web-storage
+
+#ingress_hosts:
+#  - host: example.com
+#    http:
+#      paths:
+#      - backend:
+#          service:
+#            name: php-nginx-composer
+#            port:
+#              number: 8080
+#        path: /
+#        pathType: Prefix
 
 timezone: UTC
+
+user_id: 1001
+group_id: 1001
+
+composer_modules: ""
+extra_packages: ""
