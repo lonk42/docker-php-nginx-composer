@@ -27,20 +27,20 @@ spec:
         - name: EXTRA_PACKAGES
           value: "{{ .Values.extra_packages }}"
         ports:
-          - containerPort: 80
+          - containerPort: 8080
             protocol: TCP
         readinessProbe:
           failureThreshold: 3
           initialDelaySeconds: 10
           periodSeconds: 5
           tcpSocket:
-            port: 80
+            port: 8080
         livenessProbe:
           failureThreshold: 3
           initialDelaySeconds: 10
           periodSeconds: 5
           tcpSocket:
-            port: 80
+            port: 8080
         volumeMounts:
         {{- range .Values.volume_mounts -}}
           {{ . | nindent 5 }}
@@ -49,4 +49,3 @@ spec:
         {{- range .Values.volumes -}}
           {{ . | nindent 5 }}
         {{- end }}
-        restartPolicy: Always

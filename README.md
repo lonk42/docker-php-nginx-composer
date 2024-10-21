@@ -1,12 +1,12 @@
 # Docker PHP-FPM+Nginx with PHP Composer
 Basic [Alpine Linux](https://www.alpinelinux.org/) base container image running [PHP-FPM](https://www.php.net/manual/install.fpm.php) + [Nginx](https://nginx.org/) with [composer](https://getcomposer.org/).
 
-![release](https://img.shields.io/badge/version-1.0.0-green)
+![release](https://img.shields.io/badge/version-1.0.1-green)
 ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Usage
 
-* Nginx runs on port 80
+* Nginx runs on port 8080
 * Document root is set to `/var/www/public`
 * Composer modules are installed in `/var/www/modules`
   * Define these modules as the environment variable `COMPOSER_MODULES`
@@ -15,7 +15,7 @@ Basic [Alpine Linux](https://www.alpinelinux.org/) base container image running 
 
 ### Docker CLI
 ```
-docker run -p 80:80 -v /path/to/your_php_code:/var/www/public -v /path/to/composer_modules:/var/www/modules -e COMPOSER_MODULES="module/path module2/path" onthelink/php-nginx-composer:latest
+docker run -p 80:8080 -v /path/to/your_php_code:/var/www/public -v /path/to/composer_modules:/var/www/modules -e COMPOSER_MODULES="module/path module2/path" onthelink/php-nginx-composer:latest
 ```
 
 ### Helm
