@@ -1,0 +1,17 @@
+{{- range .Values.pvc -}}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  finalizers:
+  - kubernetes.io/pvc-protection
+  name: {{ .name }}
+spec:
+  accessModes:
+    {{- .accessModes | toYaml | nindent 4 }}
+  resources:
+    requests:
+      storage: {{ .storage }}
+  volumeMode: {{ .volumeMode | default "Filesystem" }}
+  volumeName: {{ .volumeName }}
+{{- end }}

@@ -1,4 +1,13 @@
 ---
+pvc: []
+#pvc:
+#  - name: web-storage
+#    accessModes:
+#      - ReadWriteOnce
+#    storage: 15Gi
+#    volumeMode: Filesystem
+#    volumeName: web-storage-pv
+
 volume_mounts: []
 volumes: []
 
