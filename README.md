@@ -22,9 +22,10 @@ docker run -p 80:8080 -v /path/to/your_php_code:/var/www/public -v /path/to/comp
 
 ### Helm
 ```
-cd helm
-# Edit values.yaml
-helm upgrade --namespace my_namespace --create-namespace -i my_appname . --values values.yaml
+git clone https://github.com/lonk42/docker-php-nginx-composer.git
+helm show values docker-php-nginx-composer/helm/ > values.yaml
+# Edit values as needed
+helm upgrade --namespace my_namespace --create-namespace -i my_appname docker-php-nginx-composer/helm/ --values values.yaml
 ```
 
 ## Building
