@@ -5,8 +5,8 @@ kind: Ingress
 metadata:
   name: {{ .Chart.Name }}
 {{- if hasKey .Values.ingress "annotations" }}
-annotations:
-	{{- .Values.ingress.annotations | toYaml | nindent 2 }}
+  annotations:
+	  {{- .Values.ingress.annotations | toYaml | nindent 4 }}
 {{- end }}
 spec:
   rules:
