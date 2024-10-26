@@ -19,17 +19,20 @@ volumes: []
 #    persistentVolumeClaim:
 #      claimName: web-storage
 
-#ingress_hosts:
-#  - host: example.com
-#    http:
-#      paths:
-#      - backend:
-#          service:
-#            name: php-nginx-composer
-#            port:
-#              number: 8080
-#        path: /
-#        pathType: Prefix
+#ingress:
+#  annotations:
+#    example: reee
+#  rules:
+#    - host: example.com
+#      http:
+#        paths:
+#        - backend:
+#            service:
+#              name: php-nginx-composer
+#              port:
+#                number: 8080
+#          path: /
+#          pathType: Prefix
 
 timezone: UTC
 
